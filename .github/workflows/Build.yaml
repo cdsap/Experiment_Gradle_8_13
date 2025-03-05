@@ -47,6 +47,6 @@ jobs:
         run: java -version
 
       - name: Run tests
-        run: ./gradlew :help
+        run: ./gradlew assembleDebug -Dscan.tag.${{ matrix.vendor }}  -Dscan.tag.${{ matrix.version }}
         env:
           DEVELOCITY_ACCESS_KEY: ${{ secrets.DV_KEY }}
