@@ -13,7 +13,7 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          MATRIX=$(jq -n \
+          MATRIX=$(jq -c -n \
             --argjson temurin '["17.0.8", "17.0.9", "17.0.10", "19.0.2", "19.0.3", "19.0.4", "20.0.1", "20.0.2", "20.0.3", "21.0.0", "21.0.1", "21.0.2"]' \
             --argjson zulu '["17.0.7", "17.0.8", "17.0.9", "19.0.1", "19.0.2", "19.0.3", "20.0.0", "20.0.1", "20.0.2", "21.0.0", "21.0.1"]' \
             --argjson corretto '["17.0.6", "17.0.7", "17.0.8", "19.0.1", "19.0.2", "19.0.3", "21.0.0", "21.0.1"]' \
@@ -24,8 +24,8 @@ jobs:
               + ([$corretto[] | {vendor:"corretto", version: .}])
               + ([$liberica[] | {vendor:"liberica", version: .}])
             )}')
-          echo "Matrix: $MATRIX"
-          echo "::set-output name=matrix::$MATRIX"
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          echo "Generated matrix: $MATRIX"
         shell: bash
 
   test:
