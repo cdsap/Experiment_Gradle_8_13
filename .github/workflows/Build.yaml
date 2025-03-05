@@ -48,3 +48,5 @@ jobs:
 
       - name: Run tests
         run: ./gradlew :help
+        env:
+          DEVELOCITY_ACCESS_KEY: ${{ secrets.DV_KEY }}
