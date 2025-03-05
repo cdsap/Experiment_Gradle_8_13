@@ -75,6 +75,7 @@ subprojects {
 allprojects {
   normalization {
     runtimeClasspath {
+      ignore("**/module-descriptor.txt")
       ignore("**/java/lang/invoke/**")
     }
 
