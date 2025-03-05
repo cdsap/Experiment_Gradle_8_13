@@ -47,6 +47,6 @@ jobs:
         run: java -version
 
       - name: Run tests
-        run: ./gradlew :core:analytics:compileDemoDebugJavaWithJavac -Dscan.tag."${{ matrix.vendor }}"  -Dscan.tag."${{ matrix.version }}" -Dscan.tag.experiments_plugin_with_normalization
+        run: ./gradlew :core:analytics:compileDemoDebugJavaWithJavac -Dscan.tag."${{ matrix.vendor }}"  -Dscan.tag."${{ matrix.version }}" -Dscan.tag.experiments_no_plugin_with_normalization
         env:
           DEVELOCITY_ACCESS_KEY: ${{ secrets.DV_KEY }}
