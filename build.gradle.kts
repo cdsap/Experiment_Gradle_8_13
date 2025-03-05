@@ -70,3 +70,12 @@ subprojects {
         apply(plugin = "org.gradle.android.cache-fix")
     }
 }
+
+
+allprojects {
+  normalization {
+    runtimeClasspath {
+      ignore("**/java/lang/invoke/**")
+    }
+
+}}

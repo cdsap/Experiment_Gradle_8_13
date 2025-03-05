@@ -14,10 +14,10 @@ jobs:
       - id: set-matrix
         run: |
           MATRIX=$(jq -c -n \
-            --argjson temurin '["17.0.14+7"]' \
-            --argjson zulu '["17.0.2+8","17.0.10+7"]' \
-            --argjson corretto '["17"]' \
-            --argjson liberica '["17.0.8+7"]' \
+            --argjson temurin '["17.0.12+7","17.0.13+11","17.0.14+7"," 18.0.2+101","19.0.2+7","20.0.2+9","21.0.4+7.0.LTS","21.0.5+11.0.LTS","21.0.6+7.0.LTS","22.0.2+9","23.0.2+7"]' \
+            --argjson zulu '["17.0.2+8","17.0.10+7", "17.0.14+7", "18.0.2+1","19.0.2+7", "20.0.2+9", "21.0.1+12","21.0.5+11","21.0.6+7", "22.0.2+9","23.0.2+7"]' \
+            --argjson corretto '["17", "18","19","20","21","22","23"]' \
+            --argjson liberica '["17.0.8+7", "17.0.8+1", "17.0.9+11","18.0.2+1","19.0.2+9","20.0.2+10","21.0.4+9","21.0.5+11", "21.0.6+10", "22.0.1+12", "23.0.2+9"]' \
             '{include: (
               ([$temurin[] | {vendor:"temurin", version: .}])
               + ([$zulu[] | {vendor:"zulu", version: .}])
@@ -47,13 +47,6 @@ jobs:
         run: java -version
 
       - name: Run tests
-        run: ./gradlew :core:analytics:compileDemoDebugJavaWithJavac -Dscan.tag."${{ matrix.vendor }}"  -Dscan.tag."${{ matrix.version }}" -Dscan.tag.uploading_apks
+        run: ./gradlew :core:analytics:compileDemoDebugJavaWithJavac -Dscan.tag."${{ matrix.vendor }}"  -Dscan.tag."${{ matrix.version }}" -Dscan.tag.experiments_plugin_with_normalization
         env:
           DEVELOCITY_ACCESS_KEY: ${{ secrets.DV_KEY }}
-      - name: Archive Comparison Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: files-${{ matrix.vendor }}-${{ matrix.version }}
-          path: |
-            /home/runner/.gradle/caches/8.13/transforms/*
-          if-no-files-found: error
