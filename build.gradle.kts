@@ -64,7 +64,7 @@ plugins {
      // Plugin applied to allow module graph generation
     id ("io.github.cdsap.kotlinprocess") version "0.1.7"
     id ("io.github.cdsap.gradleprocess") version "0.1.3"
-    id ("io.github.cdsap.gc-report") version "0.1.0"
+    id ("io.github.cdsap.gcreport") version "0.1.0"
 }
 
 gcReport {
