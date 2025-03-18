@@ -35,6 +35,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
+    configureKotlinWithBuildServices()
     commonExtension.apply {
         compileSdk = 35
 
@@ -68,7 +69,7 @@ internal fun Project.configureKotlinJvm() {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
+    configureKotlinWithBuildServices()
     configureKotlin<KotlinJvmProjectExtension>()
 }
 
