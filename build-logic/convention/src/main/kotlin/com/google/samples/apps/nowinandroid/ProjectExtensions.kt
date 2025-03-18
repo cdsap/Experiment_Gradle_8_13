@@ -16,30 +16,11 @@
 
 package com.google.samples.apps.nowinandroid
 
-import com.android.build.gradle.internal.services.getBuildService
-import com.google.samples.apps.nowinandroid.KotlinCompileBuildService.RegistrationAction
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val Project.libs
     get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-
-fun Project.configureKotlinWithBuildServices() {
-    RegistrationAction(
-        project,
-        3,
-    ).execute()
-    tasks.withType<KotlinCompile>().configureEach {
-        usesService(
-            getBuildService(
-                project.gradle.sharedServices,
-                KotlinCompileBuildService::class.java,
-            ),
-        )
-    }
-}
