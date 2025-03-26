@@ -44,6 +44,7 @@ dependencyResolutionManagement {
 }
 plugins {
     id("com.gradle.develocity") version "3.19"
+    id("com.android.settings") version "8.7.3"
 }
 
 develocity {
@@ -94,4 +95,18 @@ check(JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
     Java Home: [${System.getProperty("java.home")}]
     https://developer.android.com/build/jdks#jdk-config-in-studio
     """.trimIndent()
+}
+
+android {
+    execution {
+        profiles {
+           create("default") {
+               r8 {
+                   runInSeparateProcess = true
+                   jvmOptions += listOf("-Xmx4G","-Xlog:gc*:file=/home/runner/work/Telltale/Telltale/r8_gc.log")
+               }
+
+            }
+        }
+    }
 }

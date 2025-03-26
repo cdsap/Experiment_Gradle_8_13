@@ -68,5 +68,5 @@ plugins {
 }
 
 gcReport {
-    logs = listOf("gradle_gc.log","kotlin_gc.log")
+    logs = listOf("gradle_gc.log","kotlin_gc.log","r8_gc.log")
 }
